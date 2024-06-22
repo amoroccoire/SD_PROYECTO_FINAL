@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+    ###postgresql
+    db-cartilla:
+      container_name: db-cartilla
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_DB: ms-cartilla
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: root
+      ports:
+        - "5431:5432"
+      command: ["postgres", "-p", "5432"]
+
