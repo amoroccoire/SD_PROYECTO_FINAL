@@ -1,4 +1,4 @@
-package com.sdg4.microservicio_Cartilla.Elections.repositories;
+package com.sdg4.microservicio_Cartilla.Elections.repositories.reactive;
 
 import com.sdg4.microservicio_Cartilla.Elections.models.entities.Election;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

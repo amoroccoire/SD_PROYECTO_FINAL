@@ -1,4 +1,4 @@
-package com.sdg4.microservicio_Cartilla.Elections.repositories;
+package com.sdg4.microservicio_Cartilla.Elections.repositories.jpa;
 
 import com.sdg4.microservicio_Cartilla.Elections.models.entities.Election;
 import org.springframework.context.annotation.Bean;
