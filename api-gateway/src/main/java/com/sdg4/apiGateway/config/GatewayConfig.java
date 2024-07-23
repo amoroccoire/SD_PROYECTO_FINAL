@@ -26,6 +26,8 @@ public class GatewayConfig {
                         .uri("lb://cartilla-service"))
                 .route("vote-service", r -> r.path("/votes/**")
                         .uri("lb://vote-service"))
+                .route("estadistica-service", r -> r.path("/estadistica/**")
+                        .uri("lb://ms-statistics"))
                 .build();
     }
 

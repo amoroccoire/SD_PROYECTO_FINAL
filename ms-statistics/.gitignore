@@ -19,9 +19,6 @@ target/
 *.iml
 *.ipr
 
-/kafka-cluster/**
-/kafka-cluster-without-zk/**
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

@@ -23,13 +23,24 @@ public class VoteController {
 
     @PostMapping
     public Mono<ResponseEntity<String>> registerVote(@RequestBody @Valid CreateVote vote) {
-        return validationService.isElectionIdValid(vote.electionId(), vote.ballotId(), vote.candidateId())
-                .flatMap(isValid -> {
-                    if (!isValid) {
-                        return Mono.just(new ResponseEntity<>("ID de la eleccion invalida", HttpStatus.BAD_REQUEST));
-                    }
 
-                    return voteService.createVote(vote).map(savedVote -> new ResponseEntity<>("Registro guardado con exito", HttpStatus.CREATED));
+        return voteService.searchVote(vote)
+                .flatMap(exists -> {
+                    if (!exists) {
+                        return validationService.isElectionIdValid(vote.electionId(), vote.ballotId(), vote.candidateId())
+                                .flatMap(isValid -> {
+                                    if (!isValid) {
+                                        return Mono.just(new ResponseEntity<>("ID de la eleccion invalida", HttpStatus.BAD_REQUEST));
+                                    }
+                                    return voteService.createVote(vote)
+                                            .map(savedVote -> new ResponseEntity<>("Registro guardado con exito", HttpStatus.CREATED));
+                                });
+                    } else {
+                        return Mono.just(new ResponseEntity<>("Usted ya ha votado", HttpStatus.ACCEPTED));
+                    }
+                })
+                .doOnError(error -> {
+                    System.out.println("ERROR: " + error.getMessage());
                 });
     }
 }

@@ -2,49 +2,61 @@ package com.sdg4.votes.models.dto;
 
 public class CandidateDTO {
 
-    private Integer candidateId;
+    private Integer id;
     private String name;
     private String party;
     private String position;
-    private BallotDTO ballot;
+    //private BallotDTO ballot;
 
-    public Integer getCandidateId() {
-        return candidateId;
+    @Override
+    public String toString() {
+        return "CandidateDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", party='" + party + '\'' +
+                ", position='" + position + '\'' +
+                '}';
     }
 
-    public void setCandidateId(Integer candidateId) {
-        this.candidateId = candidateId;
-    }
-
-    public String getName() {
-        return name;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getParty() {
-        return party;
-    }
-
     public void setParty(String party) {
         this.party = party;
-    }
-
-    public String getPosition() {
-        return position;
     }
 
     public void setPosition(String position) {
         this.position = position;
     }
 
-    public BallotDTO getBallot() {
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getParty() {
+        return party;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+
+
+    /*public BallotDTO getBallot() {
         return ballot;
     }
 
     public void setBallot(BallotDTO ballot) {
         this.ballot = ballot;
-    }
+    }*/
 }

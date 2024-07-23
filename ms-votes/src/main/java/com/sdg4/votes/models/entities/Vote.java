@@ -8,10 +8,10 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 
 @Data
-@Document(collation = "votes")
+@Document(collection = "votes")
 public class Vote {
     @Id
-    private Long id;
+    private String id;
 
     @NotNull(message = "ID del votante no puede ser null")
     @Size(min = 8, max = 15, message = "Voter ID deberia estar entre 8 and 15 caracteres")
@@ -28,11 +28,11 @@ public class Vote {
 
     private LocalDateTime timestamp;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

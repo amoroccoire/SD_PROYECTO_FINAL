@@ -30,7 +30,13 @@
 			microservicio_Cartilla
 		</module>
 		<module>
+			ms-votes
+		</module>
+		<module>
 			discovery-server
+		</module>
+		<module>
+			ms-statistics
 		</module>
 	</modules>
 

@@ -6,27 +6,18 @@ import java.util.List;
 
 public class BallotDTO {
 
-    private Integer ballotId;
-    private Integer electionId;
+    private Integer id;
     private String name;
     private String description;
 
-    private List<CandidateDTO> candidateList;
+    private List<CandidateDTO> candidates;
 
-    public Integer getBallotId() {
-        return ballotId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBallotId(Integer ballotId) {
-        this.ballotId = ballotId;
-    }
-
-    public Integer getElectionId() {
-        return electionId;
-    }
-
-    public void setElectionId(Integer electionId) {
-        this.electionId = electionId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,11 +36,21 @@ public class BallotDTO {
         this.description = description;
     }
 
-    public List<CandidateDTO> getCandidateList() {
-        return candidateList;
+    public List<CandidateDTO> getCandidates() {
+        return candidates;
     }
 
-    public void setCandidateList(List<CandidateDTO> candidateList) {
-        this.candidateList = candidateList;
+    public void setCandidates(List<CandidateDTO> candidates) {
+        this.candidates = candidates;
+    }
+
+    @Override
+    public String toString() {
+        return "BallotDTO{" +
+                "id=" + id +
+                ", name=" + name +
+                ", description='" + description + '\'' +
+                ", candidates=" + candidates +
+                '}';
     }
 }

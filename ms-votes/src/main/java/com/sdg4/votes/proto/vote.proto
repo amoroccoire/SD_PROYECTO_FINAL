@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.sdg4.votes.proto";
+option java_outer_classname = "VoteProto";
+
+package com.sdg4.votes.proto.compiledProto;
+
+message LocalDateTime {
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+    int32 hour = 4;
+    int32 minute = 5;
+    int32 second = 6;
+}
+
+message Vote {
+    string id = 1;             // ID del voto
+    int32 electionId = 2;      // ID de la elección
+    int32 ballotId = 3;        // ID de la boleta
+    int32 candidateId = 4;     // ID del candidato
+    LocalDateTime voteTime = 5; // Hora del voto
+}
