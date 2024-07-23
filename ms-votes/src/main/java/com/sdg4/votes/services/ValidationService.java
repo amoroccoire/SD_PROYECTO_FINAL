@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class ValidationService {
@@ -18,31 +19,42 @@ public class ValidationService {
     }
 
     public Mono<Boolean> isElectionIdValid(Integer electionId, Integer ballotId, Integer candidateId) {
+        System.out.println("DATOS en isElectionIdValid" + electionId + "\n" + ballotId + "\n" + candidateId);
         return webClient.get()
                 .uri("/eleccion/{id}", electionId)
                 .retrieve()
                 .bodyToMono(ElectionDTO.class)
+                .doOnNext(election -> {
+                    // Imprimir el objeto ElectionDTO completo
+                    System.out.println("ElectionDTO: " + election);
+                })
                 .map(election -> {
                     //validar ballot
-                    BallotDTO ballot = election.getBallotList().stream()
-                            .filter(b -> b.getBallotId().equals(ballotId))
+                    BallotDTO ballot = election.getBallots().stream()
+                            .filter(b -> b.getId().equals(ballotId))
                             .findFirst()
                             .orElse(null);
 
-                    System.out.println(ballot);
-
-                    if (ballot == null)
+                    System.out.println("Resultado final de BALLOT :" + (ballot == null));
+                    if (ballot == null) {
+                        System.out.println("esto es el ballot"  + ballot);
                         return false;
 
-                    CandidateDTO candidate = ballot.getCandidateList().stream()
-                            .filter(c -> c.getCandidateId().equals(candidateId))
+                    }
+
+                    CandidateDTO candidate = ballot.getCandidates().stream()
+                            .filter(c -> c.getId().equals(candidateId))
                             .findFirst()
                             .orElse(null);
 
-                    System.out.println(candidate);
-
+                    System.out.println("esto es el candidato"  + candidate);
+                    System.out.println("Resultado final de candidate :" + (candidate != null));
                     return candidate != null;
                 })
-                .onErrorReturn(false);
+                .doOnError(error -> System.out.println("Error en isElectionIdValid: " + error.getMessage()))
+                .onErrorReturn(false)
+                .log()
+                .subscribeOn(Schedulers.boundedElastic());
+
     }
 }
