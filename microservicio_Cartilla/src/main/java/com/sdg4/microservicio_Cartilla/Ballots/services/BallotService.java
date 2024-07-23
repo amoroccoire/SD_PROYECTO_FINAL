@@ -7,7 +7,7 @@ import com.sdg4.microservicio_Cartilla.Candidates.models.entities.Candidate;
 import com.sdg4.microservicio_Cartilla.Ballots.repositories.BallotRepository;
 import com.sdg4.microservicio_Cartilla.Candidates.repositories.CandidateRepository;
 import com.sdg4.microservicio_Cartilla.Elections.models.entities.Election;
-import com.sdg4.microservicio_Cartilla.Elections.repositories.jpa.ElectionRepository;
+import com.sdg4.microservicio_Cartilla.Elections.repositories.ElectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
