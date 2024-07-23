@@ -1,12 +1,12 @@
 package com.sdg4.microservicio_Cartilla.Elections.controllers;
 
 
+import com.sdg4.microservicio_Cartilla.Elections.models.DTO.DtoElection;
 import com.sdg4.microservicio_Cartilla.Elections.models.entities.Election;
 import com.sdg4.microservicio_Cartilla.Elections.services.ElectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,17 +24,18 @@ public class ElectionController {
         return ResponseEntity.ok(list);
     }
 
-    //ADMIN O USUARIO  - retorna la eleccion por ID, es reactivo, funciona igual con fetch
+    //ADMIN O USUARIO  - retorna la eleccion por ID
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<Election>> getElectionById(@PathVariable Integer id) {
-        return electionServices.getElectionById(id)
-                .map(election -> ResponseEntity.ok(election))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<Election>> getElectionById(@PathVariable Integer id) {
+        Optional<Election> res = electionServices.getElectionById(id);
+        if (!res.isPresent())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(res);
     }
 
     //ADMIN-Crear eleccion
     @PostMapping
-    public ResponseEntity<Election> createElection(@RequestBody Election election) {
+    public ResponseEntity<Election> createElection(@RequestBody DtoElection election) {
         Election createdElection = electionServices.createElection(election);
         return ResponseEntity.ok(createdElection);
     }
