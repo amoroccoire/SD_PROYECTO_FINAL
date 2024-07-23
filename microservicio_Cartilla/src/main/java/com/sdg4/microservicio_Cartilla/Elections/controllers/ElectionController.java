@@ -6,6 +6,7 @@ import com.sdg4.microservicio_Cartilla.Elections.services.ElectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +24,12 @@ public class ElectionController {
         return ResponseEntity.ok(list);
     }
 
-    //ADMIN O USUARIO  - retorna la eleccion por ID
+    //ADMIN O USUARIO  - retorna la eleccion por ID, es reactivo, funciona igual con fetch
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Election>> getElectionById(@PathVariable Integer id) {
-        Optional<Election> election = electionServices.getElectionById(id);
-        return ResponseEntity.ok(election);
+    public Mono<ResponseEntity<Election>> getElectionById(@PathVariable Integer id) {
+        return electionServices.getElectionById(id)
+                .map(election -> ResponseEntity.ok(election))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     //ADMIN-Crear eleccion
