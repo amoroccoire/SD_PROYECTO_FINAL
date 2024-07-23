@@ -3,17 +3,19 @@ package com.sdg4.votes.models.dto;
 import java.util.List;
 
 public class ElectionDTO {
-    private Integer electionId;
+    private Integer id;
     private String name;
     private String description;
-    private List<BallotDTO> ballotList;
+    private String startDate;
+    private String endDate;
+    private List<BallotDTO> ballots;
 
-    public Integer getElectionId() {
-        return electionId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setElectionId(Integer electionId) {
-        this.electionId = electionId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,11 +34,39 @@ public class ElectionDTO {
         this.description = description;
     }
 
-    public List<BallotDTO> getBallotList() {
-        return ballotList;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setBallotList(List<BallotDTO> ballotList) {
-        this.ballotList = ballotList;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<BallotDTO> getBallots() {
+        return ballots;
+    }
+
+    public void setBallots(List<BallotDTO> ballots) {
+        this.ballots = ballots;
+    }
+
+    @Override
+    public String toString() {
+        return "ElectionDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", ballots=" + ballots +
+                '}';
     }
 }
